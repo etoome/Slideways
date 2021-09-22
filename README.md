@@ -10,7 +10,7 @@
 
 <div align="center">
   Python implementation of
-  <a href="https://rnrgames.com/slideways" title="Slideways">Slideways</a>
+  <a href="https://rnrgames.com/slideways" title="Slideways">Slideways®</a>
 </div>
 
 <div align="center">
