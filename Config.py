@@ -1,0 +1,11 @@
+BOARD_SIZE = 4
+NUMBER_CASE_TO_WIN = 4 # <= BOARD_SIZE
+
+
+# Minimax
+INFINITE = 1000000000
+WIN  = +10
+DRAW =   0
+LOSS = -10
+
+AI_TIME = 1 # s
