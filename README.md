@@ -9,7 +9,7 @@
 <h3 align="center">Slideways</h3>
 
 <div align="center">
-  Python implementation of
+  Python board game inspired by
   <a href="https://rnrgames.com/slideways" title="Slideways">Slideways®</a>
 </div>
 
