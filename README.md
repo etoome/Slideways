@@ -15,7 +15,7 @@
 <div align="center">
   Original
   <a
-    href="https://github.com/Progitiel/Slideways/blob/main/images"
+    href="https://github.com/etoome/Slideways/blob/main/images"
     title="icons"
     >icons</a
   >
@@ -24,7 +24,7 @@
 </div>
 
 <div align="center">
-  <img width="325" src="https://github.com/etoome/Slideways/blob/main/screenshots/game_player_easy.png">
+  <img width="650" src="https://github.com/etoome/Slideways/blob/main/screenshots/game_player_easy.png">
 </div>
 
 ### Install
