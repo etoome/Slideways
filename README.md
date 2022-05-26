@@ -1,6 +1,6 @@
 <div align="center">
   <img
-    src="https://github.com/Progitiel/Slideways/blob/main/images/icon.png"
+    src="https://github.com/etoome/Slideways/blob/main/images/icon.png"
     width="100px"
     alt="Slideways"
   />
@@ -24,6 +24,10 @@
   <a href="https://www.flaticon.com/" title="Flaticon">flaticon</a>
 </div>
 
+<div align="center">
+  <img width="325" src="https://github.com/etoome/Slideways/blob/main/screenshots/game_player_easy.png">
+</div>
+
 ### Install
 
 ```bash
@@ -33,5 +37,5 @@ pip3 install -r requirements.txt
 ### Run
 
 ```bash
-python3 Slideways.py
+python3 src/Slideways.py
 ```

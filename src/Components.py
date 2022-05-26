@@ -100,6 +100,7 @@ class recordButton(QPushButton):
 
         return self.checked
 
+
 class replayButton(QPushButton):
     def __init__(self):
         """Bouton pour charger un replay"""
@@ -163,7 +164,6 @@ class playerButton(QPushButton):
             self.setIcon(QIcon('./images/ai_medium.png'))
         elif mode == -3:
             self.setIcon(QIcon('./images/ai_hard.png'))
-
 
     def setClickable(self, val):
         """Active ou désactive le bouton"""
@@ -339,7 +339,7 @@ class playerSquare(QPushButton):
         if playerNumber == 1:
             styleSheet += "border-radius: 8px;background-color:#E22327;"
         elif playerNumber == 2:
-             styleSheet += "border-radius: 8px;background-color:#F8EE48;"
+            styleSheet += "border-radius: 8px;background-color:#F8EE48;"
 
         self.setStyleSheet(styleSheet)
 
@@ -365,6 +365,7 @@ class winnerName(QLabel):
         self.setFixedHeight(100)
         self.setFocusPolicy(Qt.NoFocus)
 
+
 class closeButton(QPushButton):
     def __init__(self):
         """Bouton de fermeture"""
@@ -375,7 +376,6 @@ class closeButton(QPushButton):
         self.setIconSize(QSize(40, 40))
         self.setStyleSheet('border:none;')
         self.setIcon(QIcon('./images/close.png'))
-
 
 
 class scoreLabel(QLabel):

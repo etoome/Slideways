@@ -4,10 +4,10 @@ from PyQt5 import QtCore
 from PyQt5.Qt import QSize, Qt
 from PyQt5.QtCore import QTimer
 from PyQt5.QtGui import QCursor, QIcon
-from PyQt5.QtWidgets import (QApplication, QCheckBox, QDialog, QGridLayout,
-                             QGroupBox, QHBoxLayout, QLabel, QLayout,
-                             QLineEdit, QMainWindow, QPushButton, QSizePolicy,
-                             QSlider, QStatusBar, QVBoxLayout, QWidget, QFileDialog)
+from PyQt5.QtWidgets import (QApplication, QGridLayout,
+                             QHBoxLayout, QLabel,
+                             QLineEdit, QMainWindow,
+                             QVBoxLayout, QWidget, QFileDialog)
 
 from App import App
 from Replay import Replay
@@ -88,7 +88,8 @@ class Window(QMainWindow):
     def initUI(self):
         """Initialise le layout global"""
 
-        self.setWindowTitle(self.title + (' - 🔴 Recording...' if self.app.record.isRecording() else ''))
+        self.setWindowTitle(
+            self.title + (' - 🔴 Recording...' if self.app.record.isRecording() else ''))
         self.setWindowIcon(QIcon('./images/icon.png'))
 
         if self.firstStart:
@@ -118,9 +119,12 @@ class Window(QMainWindow):
                 windowLayout = QGridLayout()
                 windowLayout.addLayout(self.scoreLayout(), 0, 0, 1, 0)
                 windowLayout.addLayout(self.topLayout(), 1, 0, 1, 0)
-                windowLayout.addLayout(self.moveLinesLayout(-1, clickable=self.app.getStarted() and self.app.getPlayerMode() == 1), 2, 0)
-                windowLayout.addLayout(self.boardLayout(self.app.getBoard(), clickable=self.app.getStarted() and self.app.getPlayerMode() == 1), 2, 1)
-                windowLayout.addLayout(self.moveLinesLayout(+1, clickable=self.app.getStarted() and self.app.getPlayerMode() == 1), 2, 2)
+                windowLayout.addLayout(
+                    self.moveLinesLayout(-1, clickable=self.app.getStarted() and self.app.getPlayerMode() == 1), 2, 0)
+                windowLayout.addLayout(self.boardLayout(self.app.getBoard(
+                ), clickable=self.app.getStarted() and self.app.getPlayerMode() == 1), 2, 1)
+                windowLayout.addLayout(
+                    self.moveLinesLayout(+1, clickable=self.app.getStarted() and self.app.getPlayerMode() == 1), 2, 2)
 
         mainWidget = QWidget()
         mainWidget.setLayout(windowLayout)
@@ -128,7 +132,7 @@ class Window(QMainWindow):
 
         self.show()
 
-        # Force la fenêtre à prendre la taille la plus petite 
+        # Force la fenêtre à prendre la taille la plus petite
         for i in range(0, 10):
             QApplication.processEvents()
         self.resize(self.minimumSizeHint())
@@ -208,7 +212,6 @@ class Window(QMainWindow):
             self.app.record.startRecord()
 
         self.initUI()
-
 
     def scoreLayout(self):
         """Layout des scores des joueurs"""
@@ -339,7 +342,7 @@ class Window(QMainWindow):
     def boardLayout(self, board, clickable=True):
         """
         Layout du plateau
-        
+
         Entrées :
             board [[int,int,...],[int,int,...],...] : listes de listes représentant le plateau
             clickable [bool] : case clickable ?
@@ -353,14 +356,16 @@ class Window(QMainWindow):
         for line in range(len(board)):
             for column in range(len(board[0])):
 
-                btPlayable = (line, column) in playableCase if clickable else True
+                btPlayable = (
+                    line, column) in playableCase if clickable else True
 
                 gb = gridButton(line, column, board[line][column], btPlayable)
 
                 bLayout.addWidget(gb, line, column)
 
                 if clickable and btPlayable:
-                    gb.clicked.connect(lambda x, l=line, c=column: self.app.setBoardCase(l, c))
+                    gb.clicked.connect(
+                        lambda x, l=line, c=column: self.app.setBoardCase(l, c))
                 else:
                     gb.setFocusPolicy(Qt.NoFocus)
 
@@ -389,7 +394,8 @@ class Window(QMainWindow):
                 mlb.setEnabled(False)
 
             if clickable:
-                mlb.clicked.connect(lambda x, y=mlb: self.app.setBoardShift(y.getLine(), y.getDirection()))
+                mlb.clicked.connect(lambda x, y=mlb: self.app.setBoardShift(
+                    y.getLine(), y.getDirection()))
             mlLayout.addWidget(mlb, line, 0)
 
         return mlLayout
@@ -406,7 +412,7 @@ class Window(QMainWindow):
         wLayout.setContentsMargins(50, 50, 50, 20)
 
         wpLayout = QHBoxLayout()
-        if winner == 0: # Egalité
+        if winner == 0:  # Egalité
             wp1 = playerSquare(1, self.app.getPlayerMode(1))
             wp1.setFixedSize(100, 100)
             wpLayout.addWidget(wp1)
@@ -425,15 +431,18 @@ class Window(QMainWindow):
 
         scLayout = QGridLayout()
         sb = startButton(True)
-        sb.clicked.connect(lambda x: (self.app.restart(), self.app.setStarted(True), self.initUI()))
+        sb.clicked.connect(lambda x: (self.app.restart(),
+                           self.app.setStarted(True), self.initUI()))
         cb = closeButton()
-        cb.clicked.connect(lambda x: (self.app.record.close() if self.app.record.isRecording() else None, self.close()))
+        cb.clicked.connect(lambda x: (self.app.record.close(
+        ) if self.app.record.isRecording() else None, self.close()))
         scLayout.addWidget(sb, 0, 0)
         scLayout.addWidget(cb, 0, 1)
 
         wLayout.addLayout(wpLayout, 0, 0, alignment=Qt.AlignCenter)
         wLayout.addWidget(wn, 1, 0, alignment=Qt.AlignCenter)
-        wLayout.addLayout(self.boardLayout(self.app.getBoard(), clickable=False), 2, 0, alignment=Qt.AlignCenter)
+        wLayout.addLayout(self.boardLayout(
+            self.app.getBoard(), clickable=False), 2, 0, alignment=Qt.AlignCenter)
         wLayout.addLayout(scLayout, 3, 0, alignment=Qt.AlignCenter)
 
         # Désactive la mode Hardcore si le joueur 1 gagne ou fait égalité
@@ -444,10 +453,9 @@ class Window(QMainWindow):
 
         return wLayout
 
-
     def replayLayout(self):
         """Layout du Replay"""
-        
+
         rLayout = QGridLayout()
         rLayout.setContentsMargins(50, 50, 50, 50)
 
@@ -469,7 +477,6 @@ class Window(QMainWindow):
 
         ml1.clicked.connect(lambda x: (self.replay.previous(), self.initUI()))
         ml2.clicked.connect(lambda x: (self.replay.next(), self.initUI()))
-
 
         draw, winner = self.replay.getWinner()
 
@@ -502,9 +509,9 @@ class Window(QMainWindow):
 
             rLayout.addLayout(pspnLayout, 1, 1)
 
-
         rLayout.addWidget(ml1, 2, 0, alignment=Qt.AlignCenter)
-        rLayout.addLayout(self.boardLayout(self.replay.getBoard(), clickable=False), 2, 1, alignment=Qt.AlignCenter)
+        rLayout.addLayout(self.boardLayout(
+            self.replay.getBoard(), clickable=False), 2, 1, alignment=Qt.AlignCenter)
         rLayout.addWidget(ml2, 2, 2, alignment=Qt.AlignCenter)
 
         return rLayout
@@ -512,7 +519,8 @@ class Window(QMainWindow):
     def __setReplay(self):
         """Charge un enregistrement"""
 
-        filePath = QFileDialog.getOpenFileName(self, 'Choose a file', './Replay', "*.slideways")[0]
+        filePath = QFileDialog.getOpenFileName(
+            self, 'Choose a file', './Replay', "*.slideways")[0]
         if filePath != '':
             self.firstStart = False
 
@@ -536,4 +544,3 @@ def errorBox(e):
     errorBox.exec_()
 
     sys.exit()
-    
