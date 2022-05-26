@@ -2,7 +2,6 @@
   <img
     src="https://github.com/etoome/Slideways/blob/main/images/icon.png"
     width="100px"
-    alt="Slideways"
   />
 </div>
 
